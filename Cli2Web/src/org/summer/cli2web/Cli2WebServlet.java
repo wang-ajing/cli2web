@@ -51,6 +51,7 @@ public class Cli2WebServlet extends HttpServlet {
 							"C:\\Users\\ajing\\Documents\\GitHub\\cli2web\\Cli2Web\\build\\classes",
 							"java org.summer.cli2web.example.ProgressExample");
 			request.getSession().setAttribute("currentProcess", process);
+			request.getSession().setAttribute("formerModel", null);
 		} else if (request.getRequestURI().endsWith("current")) {
 			Process proc = (Process) request.getSession().getAttribute(
 					"currentProcess");

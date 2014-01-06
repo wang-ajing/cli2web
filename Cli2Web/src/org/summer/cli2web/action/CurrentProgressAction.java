@@ -42,6 +42,9 @@ public class CurrentProgressAction {
 		String line = null;
 		while (reader.ready() && (line = reader.readLine()) != null) {
 			status.getOutputInformation().add(line);
+			if (line.startsWith("input")) {
+				status.setNeedInput(true);
+			}
 		}
 
 		reader = new BufferedReader(

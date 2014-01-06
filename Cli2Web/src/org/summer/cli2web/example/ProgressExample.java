@@ -15,7 +15,7 @@ public class ProgressExample {
 			if (i % 5 == 0) {
 				System.out.println("input any data you want: ");
 				Scanner scanner = new Scanner(System.in);
-				System.out.println("info: " + scanner.nextLine());
+				i = scanner.nextInt();
 			}
 		}
 	}

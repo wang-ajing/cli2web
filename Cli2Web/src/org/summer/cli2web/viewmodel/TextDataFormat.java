@@ -1,6 +1,5 @@
 package org.summer.cli2web.viewmodel;
 
-
 public class TextDataFormat extends AbstractDataFormat {
 	public TextDataFormat(String desc) {
 		super();
@@ -12,15 +11,11 @@ public class TextDataFormat extends AbstractDataFormat {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("{\"desc\": ");
-		builder.append(getDesc());
+		builder.append("\"" + getDesc() + "\"");
 		builder.append(", \"formatType\": ");
-		builder.append(getFormatType());
+		builder.append("\"" + getFormatType() + "\"");
 		builder.append("}");
 		return builder.toString();
 	}
 
-
-
-	
-	
 }

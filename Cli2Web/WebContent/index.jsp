@@ -9,24 +9,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>HelloWorld</title>
 <script>
-	 var onQueryCurrentStatusSuccess = function(data) {
+	var onQueryCurrentStatusSuccess = function(data) {
 		if (data.totalProgress) {
 			$("#progressbar").progressbar("option", {
 				value : data.currentProgress,
 				max : data.totalProgress
 			});
 		}
-
-		if (data.expectedData) {
+		if (data.expectedData != null) {
 			//create form
 			if (data.expectedData.formatType == "TEXT") {
-				$("#submitForm")
+				$("#form")
 						.html(
-								+"<label for='data'>"
+								+"<label for='input-data'>"
 										+ data.expectedData.desc
 										+ "</label>"
 										+ "<input type='text' id='input-data'/><br/>"
-										+ "<button class='button' id='submitDataButton'>submit</button>");
+										+ "<button class='button' onclick='submitData()'>submit</button>");
 			}
 		} else {
 			queryCurrentStatus();
@@ -35,7 +34,13 @@
 	}
 	function queryCurrentStatus() {
 		$.get("cli/current", onQueryCurrentStatusSuccess, "json");
-	}
+	};
+	function submitData() {
+		$.post("cli/current", {
+			data : $("#input-data").val()
+		}, onQueryCurrentStatusSuccess);
+		$("#form").html("");
+	};
 	$(function() {
 		$(".button").button();
 		$("#progressbar").progressbar({
@@ -45,11 +50,6 @@
 			$.get("cli/start", function(data) {
 				queryCurrentStatus();
 			});
-		});
-		$("#submitDataButton").click(function() {
-			$.post("cli/current", {
-				data : $("#input-data").val()
-			}, onQueryCurrentStatusSuccess);
 		});
 	});
 </script>

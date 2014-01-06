@@ -61,13 +61,19 @@ public class ProcessStatusModel {
 	public String toJson() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{");
+		boolean appendComma = false;
 		if (currentProgress != null) {
 			sb.append("\"currentProgress\" : "
 					+ currentProgress.getCurrentProgress() + ",");
 			sb.append("\"totalProgress\": "
 					+ currentProgress.getTotalProgress());
-		} 
-		if(expectedData !=null){
+			appendComma = true;
+		}
+
+		if (expectedData != null) {
+			if (appendComma) {
+				sb.append(",");
+			}
 			sb.append("\"expectedData\": " + expectedData.toString());
 		}
 		sb.append("}");
