@@ -3,7 +3,7 @@ package org.summer.cli2web.viewmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import sun.org.mozilla.javascript.internal.json.JsonParser;
+import net.sf.json.JSONObject;
 
 public class ProcessStatusModel {
 	private CurrentProgress currentProgress;
@@ -59,24 +59,21 @@ public class ProcessStatusModel {
 	}
 
 	public String toJson() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{");
-		boolean appendComma = false;
+		
+		JSONObject root = new JSONObject();
 		if (currentProgress != null) {
-			sb.append("\"currentProgress\" : "
-					+ currentProgress.getCurrentProgress() + ",");
-			sb.append("\"totalProgress\": "
-					+ currentProgress.getTotalProgress());
-			appendComma = true;
+			root.put("currentProgress", currentProgress.getCurrentProgress());
+			root.put("totalProgress", currentProgress.getTotalProgress());
 		}
 
-		if (expectedData != null) {
-			if (appendComma) {
-				sb.append(",");
-			}
-			sb.append("\"expectedData\": " + expectedData.toString());
+		
+		if(keyInformation.size()>0){
+			root.put("keyInformation", keyInformation);
 		}
-		sb.append("}");
-		return sb.toString();
+		if (expectedData != null) {
+			root.put("expectedData", expectedData.toString());
+		}
+		
+		return root.toString();
 	}
 }

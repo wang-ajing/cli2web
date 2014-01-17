@@ -15,6 +15,14 @@
 				value : data.currentProgress,
 				max : data.totalProgress
 			});
+			if (data.currentProgress >= data.totalProgress) {
+				$("#information").append("Task DONE. <br/>");
+				return;
+			}
+		}
+
+		if (data.keyInformation != null) {
+				$("#information").append(data.keyInformation + "<br/>");
 		}
 		if (data.expectedData != null) {
 			//create form
